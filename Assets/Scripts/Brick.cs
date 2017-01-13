@@ -2,37 +2,52 @@
 using System.Collections;
 
 public class Brick : MonoBehaviour {
+    public static int numBricks = 0; 
 
 	private LevelManager lm;
 	private int numHits;
+    private bool isBreakable;
 
-	public Sprite[] hitSprites;
+    public Sprite[] hitSprites;
 
 	void Start () {
-		lm = GameObject.FindObjectOfType<LevelManager>(); 
+        isBreakable = (this.tag == "Breakable");
+
+
+        if (isBreakable){
+            numBricks++;
+            print(numBricks);
+        }
+
+        lm = GameObject.FindObjectOfType<LevelManager>(); 
 		numHits = 0;
 	
 	}
 
 	// Update is called once per frame
 	void Update () {
-
+       
 	}
 
 	
 	void OnCollisionEnter2D(Collision2D col) {
-		bool isBreakable = (this.tag == "Breakable");
+	
 		if (isBreakable) {
 			HandleHits();
-		}
+           }
 	}
+
 
 	void HandleHits() {
 		numHits++;
 		int maxHits = hitSprites.Length + 1;
-		if(numHits >= maxHits){ 
+		if(numHits >= maxHits){
+            numBricks--; //decerement number of bricks before we destroy it
 			Destroy(gameObject); //used to destroy the game object
-		}else { loadSprite(); } 
+            print(numBricks);
+            lm.BrickDestroyed();
+        }
+        else { loadSprite(); } 
 	}
 
 	void loadSprite() {
@@ -43,6 +58,8 @@ public class Brick : MonoBehaviour {
 		}																		//go to the sprite section and changes its value
 
 	}
+
+  
 
 	void simulateWin(){
 		lm.LoadNextLevel();
