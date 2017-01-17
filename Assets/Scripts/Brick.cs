@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Brick : MonoBehaviour {
-    public static int numBricks = 0; 
+    public static int numBricks = 0;
+    public AudioClip crack;
 
 	private LevelManager lm;
 	private int numHits;
@@ -31,7 +32,6 @@ public class Brick : MonoBehaviour {
 
 	
 	void OnCollisionEnter2D(Collision2D col) {
-	
 		if (isBreakable) {
 			HandleHits();
            }
@@ -43,7 +43,8 @@ public class Brick : MonoBehaviour {
 		int maxHits = hitSprites.Length + 1;
 		if(numHits >= maxHits){
             numBricks--; //decerement number of bricks before we destroy it
-			Destroy(gameObject); //used to destroy the game object
+            AudioSource.PlayClipAtPoint(crack, Camera.main.transform.position);
+            Destroy(gameObject); //used to destroy the game object
             print(numBricks);
             lm.BrickDestroyed();
         }
