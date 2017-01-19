@@ -10,24 +10,8 @@ public class IntroMusic : MonoBehaviour {
 			Destroy (gameObject);
 			print ("Music Stopped");
 		} else {
-			instance = this;
+            instance = this;
 			GameObject.DontDestroyOnLoad (gameObject); // Game Object in this case is the Intro Music component we created that holds music
 		}	
-	}
-
-
-	// Use this for initialization
-	void Start () {
-
-	}
-
-
-	
-
-	
-	// Update is called once per frame
-	void Update () {
-
-
 	}
 }
