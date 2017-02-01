@@ -5,7 +5,7 @@ public class IntroMusic : MonoBehaviour {
 
 	static IntroMusic instance = null;
 
-	void Awake() {
+	void Start() {
 		if (instance != null) {
 			Destroy (gameObject);
 			print ("Music Stopped");

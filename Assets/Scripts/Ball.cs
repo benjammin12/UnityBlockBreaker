@@ -28,7 +28,7 @@ public class Ball : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
 
-        Vector2 ballphys = new Vector2(Random.Range(0f, .2f), Random.Range(0f, .2f)); //create a random vector2 ranging from 0-0.2 for both x and y coordinates
+        Vector2 ballphys = new Vector2(Random.Range(0f, .2f), Random.Range(0f, .2f)); //keeps ball out of infinite loop by altering velocity
         
     //    AudioSource audio = GameObject.FindObjectOfType<AudioSource>(); //Our ball object has 
         if (hasStarted) {

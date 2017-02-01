@@ -42,6 +42,7 @@ public class Brick : MonoBehaviour {
 		int maxHits = hitSprites.Length + 1;
 		if(numHits >= maxHits){
             numBricks--; //decerement number of bricks before we destroy it
+            AudioSource.PlayClipAtPoint(crack, this.transform.position);
             createSmoke();
             Destroy(gameObject); //used to destroy the game object
             print(numBricks);
